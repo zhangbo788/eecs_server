@@ -74,3 +74,19 @@ class Point2(models.Model):
 
     def __str__(self):
         return self.point1.major.name + "-指标点%d.%d" % (self.point1.index, self.index)
+
+
+class Major1(models.Model):
+    manager = models.ForeignKey(DjangoUser, on_delete=models.CASCADE, verbose_name="专业负责人")
+    code = models.CharField(max_length=32, unique=True, verbose_name="专业代码")
+    name = models.CharField(max_length=32, unique=True, verbose_name="专业名称")
+    create_time = models.DateTimeField(auto_now=True, verbose_name="创建时间")
+
+    objects = models.Manager()
+
+    class Meta:
+        verbose_name_plural = "专业表"
+        verbose_name = verbose_name_plural
+
+    def __str__(self):
+        return self.name
